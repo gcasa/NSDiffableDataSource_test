@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		141AF99D2F0A1A0000A704D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 141AF9772F0A192400A704D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 141AF97E2F0A192400A704D0;
+			remoteInfo = NSDiffableDataSource_test;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		141AF97F2F0A192400A704D0 /* NSDiffableDataSource_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSDiffableDataSource_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		141AF9922F0A1A0000A704D0 /* NSDiffableDataSource_testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NSDiffableDataSource_testTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -20,6 +31,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		141AF97C2F0A192400A704D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		141AF9952F0A1A0000A704D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				141AF97F2F0A192400A704D0 /* NSDiffableDataSource_test.app */,
+				141AF9922F0A1A0000A704D0 /* NSDiffableDataSource_testTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +89,24 @@
 			productReference = 141AF97F2F0A192400A704D0 /* NSDiffableDataSource_test.app */;
 			productType = "com.apple.product-type.application";
 		};
+		141AF9932F0A1A0000A704D0 /* NSDiffableDataSource_testTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 141AF99B2F0A1A0000A704D0 /* Build configuration list for PBXNativeTarget "NSDiffableDataSource_testTests" */;
+			buildPhases = (
+				141AF9942F0A1A0000A704D0 /* Sources */,
+				141AF9952F0A1A0000A704D0 /* Frameworks */,
+				141AF9962F0A1A0000A704D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				141AF99E2F0A1A0000A704D0 /* PBXTargetDependency */,
+			);
+			name = NSDiffableDataSource_testTests;
+			productName = NSDiffableDataSource_testTests;
+			productReference = 141AF9922F0A1A0000A704D0 /* NSDiffableDataSource_testTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -81,6 +118,10 @@
 				TargetAttributes = {
 					141AF97E2F0A192400A704D0 = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					141AF9932F0A1A0000A704D0 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 141AF97E2F0A192400A704D0;
 					};
 				};
 			};
@@ -99,12 +140,20 @@
 			projectRoot = "";
 			targets = (
 				141AF97E2F0A192400A704D0 /* NSDiffableDataSource_test */,
+				141AF9932F0A1A0000A704D0 /* NSDiffableDataSource_testTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		141AF97D2F0A192400A704D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		141AF9962F0A1A0000A704D0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -121,7 +170,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		141AF9942F0A1A0000A704D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		141AF99E2F0A1A0000A704D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 141AF97E2F0A192400A704D0 /* NSDiffableDataSource_test */;
+			targetProxy = 141AF99D2F0A1A0000A704D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		141AF98D2F0A192500A704D0 /* Debug */ = {
@@ -289,6 +353,54 @@
 			};
 			name = Release;
 		};
+		141AF9992F0A1A0000A704D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blacklotus.NSDiffableDataSource-testTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NSDiffableDataSource_test.app/Contents/MacOS/NSDiffableDataSource_test";
+			};
+			name = Debug;
+		};
+		141AF99A2F0A1A0000A704D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blacklotus.NSDiffableDataSource-testTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NSDiffableDataSource_test.app/Contents/MacOS/NSDiffableDataSource_test";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -306,6 +418,15 @@
 			buildConfigurations = (
 				141AF9902F0A192500A704D0 /* Debug */,
 				141AF9912F0A192500A704D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		141AF99B2F0A1A0000A704D0 /* Build configuration list for PBXNativeTarget "NSDiffableDataSource_testTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				141AF9992F0A1A0000A704D0 /* Debug */,
+				141AF99A2F0A1A0000A704D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
