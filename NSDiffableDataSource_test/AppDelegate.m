@@ -6,12 +6,13 @@
 //
 
 #import "AppDelegate.h"
+// #import <AppKit/NSDiffableDataSource.h>
 
 @interface AppDelegate ()
-@property (strong) IBOutlet NSDiffableDataSourceSnapshot<NSString *, NSString *> *snapshot;
+@property (strong) IBOutlet NSDiffableDataSourceSnapshot *snapshot; // <NSString *, NSString *> *snapshot;
 @property (strong) IBOutlet NSWindow *window;
 @property (strong) IBOutlet NSCollectionView *collectionView;
-@property (strong) NSCollectionViewDiffableDataSource<NSString *, NSString *> *dataSource;
+@property (strong) NSCollectionViewDiffableDataSource *dataSource; // <NSString *, NSString *> *dataSource;
 - (void)configureCollectionView;
 - (void)applyInitialSnapshot;
 @end
@@ -49,11 +50,11 @@
     layout.sectionInset = NSEdgeInsetsMake(12.0, 12.0, 12.0, 12.0);
     self.collectionView.collectionViewLayout = layout;
 
-    NSUserInterfaceItemIdentifier const cellIdentifier = @"Cell";
+    NSUserInterfaceItemIdentifier const cellIdentifier = RETAIN(@"Cell");
     [self.collectionView registerClass:[NSCollectionViewItem class]
                 forItemWithIdentifier:cellIdentifier];
 
-    __weak typeof(self) weakSelf = self;
+    __unsafe_unretained typeof(self) weakSelf = self; // weak references not available under manual ref counting
     self.dataSource = [[NSCollectionViewDiffableDataSource alloc]
         initWithCollectionView:self.collectionView
                   itemProvider:^NSCollectionViewItem * _Nullable(NSCollectionView *collectionView,
@@ -65,24 +66,34 @@
         // Configure a simple label for the item
         NSTextField *label = item.textField;
         if (label == nil) {
-            label = [NSTextField labelWithString:identifier];
+            label = [[NSTextField alloc] initWithFrame:NSZeroRect];
             label.translatesAutoresizingMaskIntoConstraints = NO;
+            [label setEditable:NO];
+            [label setBordered:NO];
+            [label setBezeled:NO];
+            [label setDrawsBackground:NO];
             item.textField = label;
             [item.view addSubview:label];
             [NSLayoutConstraint activateConstraints:@[
-                [label.centerXAnchor constraintEqualToAnchor:item.view.centerXAnchor],
-                [label.centerYAnchor constraintEqualToAnchor:item.view.centerYAnchor]
+                [NSLayoutConstraint constraintWithItem:label
+                                             attribute:NSLayoutAttributeCenterX
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:item.view
+                                             attribute:NSLayoutAttributeCenterX
+                                            multiplier:1.0
+                                              constant:0.0],
+                [NSLayoutConstraint constraintWithItem:label
+                                             attribute:NSLayoutAttributeCenterY
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:item.view
+                                             attribute:NSLayoutAttributeCenterY
+                                            multiplier:1.0
+                                              constant:0.0]
             ]];
         }
 
-        label.stringValue = identifier;
-        label.font = [NSFont systemFontOfSize:15.0 weight:NSFontWeightSemibold];
-
-        item.view.wantsLayer = YES;
-        item.view.layer.backgroundColor = NSColor.windowBackgroundColor.CGColor;
-        item.view.layer.cornerRadius = 8.0;
-        item.view.layer.borderWidth = 1.0;
-        item.view.layer.borderColor = NSColor.separatorColor.CGColor;
+        label.stringValue = (identifier != nil) ? identifier : @"";
+        label.font = [NSFont systemFontOfSize:15.0];
 
         return item;
     }];
@@ -95,7 +106,7 @@
         return; // Configure first
     }
 
-    NSDiffableDataSourceSnapshot<NSString *, NSString *> *snapshot = [[NSDiffableDataSourceSnapshot alloc] init];
+    NSDiffableDataSourceSnapshot *snapshot = [[NSDiffableDataSourceSnapshot alloc] init];
     NSArray<NSString *> *sections = @[ @"Fruits" ];
     NSArray<NSString *> *items = @[ @"Apple", @"Banana", @"Cherry", @"Date" ];
 
