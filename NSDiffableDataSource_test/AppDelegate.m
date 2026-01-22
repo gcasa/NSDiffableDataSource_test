@@ -11,6 +11,8 @@
 @property (strong) IBOutlet NSDiffableDataSourceSnapshot<NSString *, NSString *> *snapshot;
 @property (strong) IBOutlet NSWindow *window;
 @property (strong) IBOutlet NSCollectionView *collectionView;
+@property (strong) IBOutlet NSTableView *tableView;
+
 @property (strong) NSCollectionViewDiffableDataSource<NSString *, NSString *> *dataSource;
 - (void)configureCollectionView;
 - (void)applyInitialSnapshot;
