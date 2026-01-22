@@ -50,7 +50,7 @@
     layout.sectionInset = NSEdgeInsetsMake(12.0, 12.0, 12.0, 12.0);
     self.collectionView.collectionViewLayout = layout;
 
-    NSUserInterfaceItemIdentifier const cellIdentifier = RETAIN(@"Cell");
+    NSUserInterfaceItemIdentifier const cellIdentifier = @"Cell";
     [self.collectionView registerClass:[NSCollectionViewItem class]
                 forItemWithIdentifier:cellIdentifier];
 
