@@ -66,30 +66,23 @@
         // Configure a simple label for the item
         NSTextField *label = item.textField;
         if (label == nil) {
-            label = [[NSTextField alloc] initWithFrame:NSZeroRect];
-            label.translatesAutoresizingMaskIntoConstraints = NO;
+            // Create label with frame that fills the item view with some padding
+            NSRect labelFrame = NSInsetRect(item.view.bounds, 10.0, 10.0);
+            label = [[NSTextField alloc] initWithFrame:labelFrame];
+            
+            // Use autoresizing mask instead of constraints
+            label.translatesAutoresizingMaskIntoConstraints = YES;
+            label.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable | 
+                                     NSViewMinXMargin | NSViewMaxXMargin | 
+                                     NSViewMinYMargin | NSViewMaxYMargin;
+            
             [label setEditable:NO];
             [label setBordered:NO];
             [label setBezeled:NO];
             [label setDrawsBackground:NO];
+            [label setAlignment:NSTextAlignmentCenter];
             item.textField = label;
             [item.view addSubview:label];
-            [NSLayoutConstraint activateConstraints:@[
-                [NSLayoutConstraint constraintWithItem:label
-                                             attribute:NSLayoutAttributeCenterX
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:item.view
-                                             attribute:NSLayoutAttributeCenterX
-                                            multiplier:1.0
-                                              constant:0.0],
-                [NSLayoutConstraint constraintWithItem:label
-                                             attribute:NSLayoutAttributeCenterY
-                                             relatedBy:NSLayoutRelationEqual
-                                                toItem:item.view
-                                             attribute:NSLayoutAttributeCenterY
-                                            multiplier:1.0
-                                              constant:0.0]
-            ]];
         }
 
         label.stringValue = (identifier != nil) ? identifier : @"";
