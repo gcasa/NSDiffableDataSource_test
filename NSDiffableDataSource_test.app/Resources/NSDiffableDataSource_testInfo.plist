@@ -1,1 +1,0 @@
-{CFBundlExecutable = "$(EXECUTABLE_NAME)"; CFBundleDevelopmentRegion = "$(DEVELOPMENT_LANGUAGE)"; CFBundleIdentifier = "com.blacklotus.NSDiffableDataSource-test"; CFBundleVersion = 1; NSHumanReadableCopyright = ""; NSMainNibFile = MainMenu; NSPrincipalClass = NSApplication; }
