@@ -113,10 +113,10 @@
     __unsafe_unretained typeof(self) weakSelf = self; // weak references not available under manual ref counting
     self.tableViewDataSource = [[NSTableViewDiffableDataSource alloc]
         initWithTableView:self.tableView
-             cellProvider:^NSView * _Nullable(NSTableView *tableView,
-                                             NSTableColumn *tableColumn,
-                                             NSInteger row,
-                                             NSString *identifier) {
+             cellProvider:^NSView *(NSTableView *tableView,
+                                    NSTableColumn *tableColumn,
+                                    NSInteger row,
+                                    id itemIdentifier) {
         NSTableCellView *cellView = [tableView makeViewWithIdentifier:@"DataCell" owner:weakSelf];
         
         if (cellView == nil) {
@@ -125,8 +125,7 @@
             cellView.identifier = @"DataCell";
             
             // Create and configure the text field
-            NSTextField *textField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 180, 20)];
-            textField.translatesAutoresizingMaskIntoConstraints = NO;
+            NSTextField *textField = [[NSTextField alloc] initWithFrame:NSMakeRect(8, 0, 184, 20)];
             textField.editable = NO;
             textField.bordered = NO;
             textField.drawsBackground = NO;
@@ -134,20 +133,21 @@
             [cellView addSubview:textField];
             cellView.textField = textField;
             
-            // Add constraints
-            [NSLayoutConstraint activateConstraints:@[
-                [textField.leadingAnchor constraintEqualToAnchor:cellView.leadingAnchor constant:8],
-                [textField.trailingAnchor constraintEqualToAnchor:cellView.trailingAnchor constant:-8],
-                [textField.centerYAnchor constraintEqualToAnchor:cellView.centerYAnchor]
-            ]];
+            // Set the frame manually since Auto Layout anchors are not available
+            [textField setFrameOrigin:NSMakePoint(8, (cellView.frame.size.height - textField.frame.size.height) / 2.0)];
+            [textField setAutoresizingMask:NSViewWidthSizable | NSViewMinYMargin | NSViewMaxYMargin];
         }
         
-        cellView.textField.stringValue = (identifier != nil) ? identifier : @"";
+        // Use itemIdentifier instead of the non-existent identifier parameter
+        NSString *displayText = (itemIdentifier != nil) ? [itemIdentifier description] : @"";
+        cellView.textField.stringValue = displayText;
         
         return cellView;
     }];
 
     self.tableView.dataSource = self.tableViewDataSource;
+    NSLog(@"delegate = %@", self.tableView.delegate);
+    // self.tableView.delegate = self.tableViewDataSource;
 }
 
 - (void)applyInitialSnapshot {
